@@ -1,0 +1,29 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>net.remvn.copyref.jetbrain-copy-reference</id>
+
+    <name>Copy Reference</name>
+
+    <vendor>remvn</vendor>
+
+    <description><![CDATA[
+        Copies project-relative file and directory references from the editor or Project tool window.<br>
+        Editor references include the caret line or selected line range, for example
+        <code>@src/main/kotlin/Main.kt:12</code>.
+        ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <actions>
+        <action id="net.remvn.copyref.CopyReference"
+                class="net.remvn.copyref.CopyReferenceAction"
+                text="Copy Reference"
+                description="Copy a project-relative file or directory reference">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>
