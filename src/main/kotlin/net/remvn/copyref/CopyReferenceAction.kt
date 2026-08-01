@@ -16,8 +16,10 @@ import kotlin.math.max
 import kotlin.math.min
 
 class CopyReferenceAction : AnAction() {
+    /** Runs update checks in the background because they only inspect project and file data. */
     override fun getActionUpdateThread() = ActionUpdateThread.BGT
 
+    /** Shows the action only when the current context contains a file inside the project. */
     override fun update(event: AnActionEvent) {
         val project = event.project
         val file = contextFile(event)
@@ -25,6 +27,7 @@ class CopyReferenceAction : AnAction() {
             project != null && file != null && ReferenceFactory.projectRelativePath(project, file) != null
     }
 
+    /** Creates a reference for the current file and editor position, then places it on the clipboard. */
     override fun actionPerformed(event: AnActionEvent) {
         val project = event.project ?: return
         val file = contextFile(event) ?: return
@@ -34,6 +37,7 @@ class CopyReferenceAction : AnAction() {
         CopyPasteManager.getInstance().setContents(StringSelection(reference))
     }
 
+    /** Prefers the editor's file and otherwise uses the only selected virtual file. */
     private fun contextFile(event: AnActionEvent): VirtualFile? {
         val editor = event.getData(CommonDataKeys.EDITOR)
         if (editor != null) {
