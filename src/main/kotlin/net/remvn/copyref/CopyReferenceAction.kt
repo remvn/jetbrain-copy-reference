@@ -73,7 +73,7 @@ internal object ReferenceFactory {
             lines.first == lines.last -> ":${lines.first}"
             else -> ":${lines.first}-${lines.last}"
         }
-        return "@$path$lineSuffix"
+        return "`$path$lineSuffix`"
     }
 
     fun projectRelativePath(project: Project, file: VirtualFile): String? {
